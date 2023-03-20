@@ -1,44 +1,47 @@
 import sqlite3
 
 
-#Добавление нового помещения 1
-conn = sqlite3.connect('buildings.db')
-cursor = conn.cursor()
-
+# 1 Add new rooms
 def new_buildings():
+    # Connect to the database
+    conn = sqlite3.connect('buildings.db')
+    cursor = conn.cursor()
+
     num_buildings = int(input("Сколько зданий вы хотите добавить? "))
     for b in range(num_buildings):
-        # Запрашиваем данные у пользователя
+        # Requesting data from the user
         building_name = input(f"\nВведите название здания {b + 1}: ")
+        conn.commit()
         num_floors = int(input("\nВведите количество этажей: "))
 
-        # Добавляем информацию о здании в таблицу buildings
+        # Adding information about the building in the buildings table
         cursor.execute("INSERT INTO buildings (name) VALUES (?)", (building_name,))
         building_id = cursor.lastrowid
 
-        # Запрашиваем и добавляем информацию об этажах и помещениях
+        # Requesting and adding information about floors and rooms
         for i in range(num_floors):
             floor_name = input(f"\nВведите название {i + 1}-го этажа: ")
+            conn.commit()
             num_rooms = int(input(f"\nВведите количество помещений на {i + 1}-м этаже: "))
 
-            # Добавляем информацию об этаже в таблицу floors
+            # Adding information about floor in the floors table
             cursor.execute("INSERT INTO floors (building_id, name) VALUES (?, ?)", (building_id, floor_name))
             floor_id = cursor.lastrowid
 
-            # Добавляем информацию о помещениях в таблицу rooms
+            # Adding information about rooms in the rooms table
             for j in range(num_rooms):
                 room_name = input(f"\nВведите название {j + 1}-го помещения на {floor_name}: ")
                 cursor.execute("INSERT INTO rooms (floor_id, name) VALUES (?, ?)", (floor_id, room_name))
+            conn.commit()
 
-        #Сохраняем базу данных
+        # Saving data base
         conn.commit()
-    # Закрываем соединение с базой данных
+    # Closing the connection to the database
     cursor.close()
     conn.close()
 
 
-
-#Показ всех зданий, этажей, помещений 2
+# 2 Showing all buildings, floors, rooms
 def display_rooms():
     # Connect to the database
     conn = sqlite3.connect('buildings.db')
@@ -65,14 +68,14 @@ def display_rooms():
     rooms = cursor.fetchall()
     print('\nСписок помещений:\n')
     for r in rooms:
-        print(r[2])
+        print(f"{r[0]}. {r[2]}")
 
     # Close the database connection
     cursor.close()
     conn.close()
 
 
-#Функция для изменения названия здания 3
+# 3 Building name changes
 def update_building_name():
     # Connect to the database
     conn = sqlite3.connect('buildings.db')
@@ -87,17 +90,19 @@ def update_building_name():
     building_id = int(input("\nВведите номер здания, которое вы хотите изменить: "))
     new_building_name = input("\nВведите новое название здания: ")
 
+    # Updating information about the building in the buildings table
     cursor.execute("UPDATE buildings SET name = ? WHERE id = ?", (new_building_name, building_id))
     conn.commit()
 
     print("\nНазвание здания обновлено успешно!")
 
 
-#Функция для изменения названия этажа 4
+# 4 Floor name changes
 def change_floor_name():
     # Connect to the database
     conn = sqlite3.connect('buildings.db')
     cursor = conn.cursor()
+
     # Show a list of buildings and ask the user for the building number
     cursor.execute("SELECT * FROM buildings")
     buildings = cursor.fetchall()
@@ -105,6 +110,7 @@ def change_floor_name():
     for b in buildings:
         print(f"{b[0]}. {b[1]}")
     building_num = int(input("\nВведите номер здания: "))
+
     # Show all floors for the selected building and ask for the floor number
     cursor.execute("SELECT * FROM floors WHERE building_id = ?", (building_num,))
     floors = cursor.fetchall()
@@ -114,7 +120,7 @@ def change_floor_name():
     floor_num = int(input("\nВведите номер этажа: "))
     new_floor_name = input("\nВведите новое название этажа: ")
 
-    # Обновляем информацию об этаже в таблице floors
+    # Updating information about the floor in the floors table
     cursor.execute("UPDATE floors SET name = ? WHERE building_id = ? AND id = ?", (new_floor_name, building_num, floor_num))
 
     # Сохраняем базу данных
@@ -127,7 +133,7 @@ def change_floor_name():
     print('Закрыли соединение с базой данных')
 
 
-#Функция для изменения названия помещения 5
+# Функция для изменения названия помещения 5
 def change_room_name():
     conn = sqlite3.connect('buildings.db')
     cursor = conn.cursor()
@@ -182,7 +188,7 @@ def change_room_name():
     print("\nПомещение успешно переименованно.")
 
 
-#Функция для добавления нового этажа и помещений на нем 6
+# Функция для добавления нового этажа и помещений на нем 6
 def add_floor():
     # Connect to the database
     conn = sqlite3.connect('buildings.db')
@@ -207,6 +213,7 @@ def add_floor():
 
     # Запрос названия нового этажа
     new_floor_name = input("\nВведите название нового этажа: ")
+    conn.commit()
 
     # Добавляем информацию об этаже в таблицу floors
     cursor.execute("INSERT INTO floors (building_id, name) VALUES (?, ?)", (building_id, new_floor_name))
@@ -219,13 +226,14 @@ def add_floor():
     for j in range(num_rooms):
         room_name = input(f"\nВведите название {j + 1}-го помещения на {new_floor_name}: ")
         cursor.execute("INSERT INTO rooms (floor_id, name) VALUES (?, ?)", (floor_id, room_name))
+    conn.commit()
 
     # Сохраняем базу данных
     conn.commit()
     print("Информация успешно добавлена в базу данных.")
 
 
-#Функция для добавления нового помещения 7
+# Функция для добавления нового помещения 7
 def add_rooms():
     # Connect to the database
     conn = sqlite3.connect('buildings.db')
@@ -265,7 +273,7 @@ def add_rooms():
     print("Изменения сохранены")
 
 
-#Функция для удаления этажа 8
+# Функция для удаления этажа 8
 def delete_floor():
     # Connect to the database
     conn = sqlite3.connect('buildings.db')
@@ -296,11 +304,12 @@ def delete_floor():
     conn.close()
 
 
-#Функция для удаления помещения 9
+# Функция для удаления помещения 9
 def delete_room():
     # Connect to the database
     conn = sqlite3.connect('buildings.db')
     cursor = conn.cursor()
+
     # Show a list of buildings and ask the user for the building number
     cursor.execute("SELECT * FROM buildings")
     buildings = cursor.fetchall()
@@ -308,6 +317,7 @@ def delete_room():
     for b in buildings:
         print(f"{b[0]}. {b[1]}")
     building_num = int(input("\nВведите номер здания: "))
+
     # Show all floors for the selected building and ask for the floor number
     cursor.execute("SELECT * FROM floors WHERE building_id = ?", (building_num,))
     floors = cursor.fetchall()
@@ -315,6 +325,7 @@ def delete_room():
     for f in floors:
         print(f"{f[0]}. {f[2]}")
     floor_id = int(input("\nВведите номер этажа: "))
+
     # Удаляем помещение
     cursor.execute("SELECT * FROM rooms WHERE floor_id = ?", (floor_id,))
     rooms = cursor.fetchall()

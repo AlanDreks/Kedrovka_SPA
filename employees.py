@@ -40,6 +40,7 @@ def show_employees():
     employees = cursor.fetchall()
 
     # выводим информацию по каждому сотруднику
+    print()
     for employee in employees:
         print(f"Фамилия: {employee[0]}\n"
               f"Имя: {employee[1]}\n"
@@ -64,7 +65,7 @@ def change_employees():
     employees = cursor.fetchall()
 
     # выводим список всех сотрудников
-    print("Список всех сотрудников:\n")
+    print("\nСписок всех сотрудников:\n")
     for employee in employees:
         print(f"{employee[0]}. {employee[1]} {employee[2]} {employee[3]} ({employee[4]}) - {employee[5]}, {employee[6]}")
 
@@ -78,7 +79,7 @@ def change_employees():
     employee = cursor.fetchone()
 
     # выводим информацию о сотруднике
-    print(f"Информация о сотруднике:")
+    print(f"\nИнформация о сотруднике:")
     print(f"Фамилия: {employee[0]}")
     print(f"Имя: {employee[1]}")
     print(f"Отчество: {employee[2]}")
@@ -113,12 +114,12 @@ def delete_employee():
     cursor.execute("SELECT * FROM employees")
 
     # выводим всех сотрудников
-    print("Список сотрудников:")
+    print("\nСписок сотрудников:")
     for row in cursor.fetchall():
-        print(row)
+        print(row[0], row[1], row[2], row[3])
 
     # запрашиваем данные сотрудника, которого нужно удалить
-    last_name = input("Введите фамилию сотрудника, которого нужно удалить: ")
+    last_name = input("\nВведите фамилию сотрудника, которого нужно удалить: ")
     first_name = input("Введите имя сотрудника, которого нужно удалить: ")
     middle_name = input("Введите отчество сотрудника, которого нужно удалить: ")
 

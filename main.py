@@ -11,8 +11,7 @@ create_data_bases()
 
 def building_main():
     while True:
-        print('\n\nВыберите действие, которое хотите выполнить: ')
-        action_building = int(input('\nДобавить новое здание и всю информацию по нему - 1'
+        action_building = int(input('\n\nДобавить новое здание и всю информацию по нему - 1'
                                     '\nПросмотр здания и его этажей - 2'
                                     '\nИзменение названия здания - 3'
                                     '\nИзменение названия этажа - 4'
@@ -21,7 +20,8 @@ def building_main():
                                     '\nДобавления нового помещения - 7'
                                     '\nУдаление этажа - 8'
                                     '\nУдаление помещения - 9'
-                                    '\nНазад - 10\n\n'))
+                                    '\nНазад - 10'
+                                    '\n\nВыберите действие, которое хотите выполнить: '))
         if action_building == 1:
             # Функция добавления информации о здании
             new_buildings()
@@ -54,19 +54,19 @@ def building_main():
             main_function()
         elif action_building == 78:
             print('\nПрограмма завершена')
-            break
+            exit()
         else:
             print('Ошибка! Попробуйте еще раз!')
 
 
 def employees_main():
     while True:
-        print('\nВыберите действие: ')
-        action_employees = int(input('\nДобавление нового сотрудника - 1'
+        action_employees = int(input('\n\nДобавление нового сотрудника - 1'
                                      '\nПоказать всю информацию по сотрудникам - 2'
                                      '\nИзменить один из параметров сотрудника - 3'
                                      '\nУдалить сотрудника - 4'
-                                     '\nНазад - 5\n\n'))
+                                     '\nНазад - 5'
+                                     '\n\nВыберите действие, которое хотите выполнить: '))
         if action_employees == 1:
             # Добавление нового сотрудника
             add_employee()
@@ -83,20 +83,20 @@ def employees_main():
             # Назад
             main_function()
         elif action_employees == 78:
-            print('Программа завершена')
-            break
+            print('\nПрограмма завершена')
+            exit()
         else:
             print('Ошибка! Попробуйте еще раз!')
 
 
 def engineering_sections_main():
     while True:
-        print('\nВыберите действие: ')
-        action_engineering_sections = int(input('\nДобавить новое оборудования - 1'
+        action_engineering_sections = int(input('\n\nДобавить новое оборудования - 1'
                                                 '\nПосмотреть список оборудования - 2'
                                                 '\nУдалить оборудование - 3'
                                                 '\nИзменить название оборудования - 4'
-                                                '\nНазад - 5\n\n'))
+                                                '\nНазад - 5'
+                                                '\n\nВыберите действие, которое хотите выполнить: '))
         if action_engineering_sections == 1:
             # Добавление нового оборудования
             add_new_section()
@@ -113,8 +113,8 @@ def engineering_sections_main():
             # Назад
             main_function()
         elif action_engineering_sections == 78:
-            print('Программа завершена')
-            break
+            print('\nПрограмма завершена')
+            exit()
         else:
             print('Ошибка! Попробуйте еще раз!')
 
@@ -122,41 +122,39 @@ def engineering_sections_main():
 def actions_main():
     while True:
         print('\nВыберите действие: ')
-        action_actions = int(input('\nДобавление нового действия - 1'
+        action_actions = int(input('\n\nДобавление нового действия - 1'
                                    '\nПоказать всю информацию по действиям - 2'
-                                   '\nУдалить действие - 43'
-                                   '\nНазад - 5\n\n'))
+                                   '\nУдалить действие - 3'
+                                   '\nНазад - 4'
+                                   '\n\nВыберите действие, которое хотите выполнить: '))
         if action_actions == 1:
-            # Добавление нового сотрудника
+            # Добавление нового действия
             add_action()
         elif action_actions == 2:
-            # Показать всю информацию по сотрудникам
+            # Показать список действий
             view_actions()
         elif action_actions == 3:
-            # Изменить параметр сотрудника
-            change_employees()
-        elif action_actions == 4:
-            # Удалить сотрудника
+            # Удалить дейтсиве
             delete_action()
-        elif action_actions == 5:
+        elif action_actions == 4:
             # Назад
             main_function()
         elif action_actions == 78:
-            print('Программа завершена')
-            break
+            print('\nПрограмма завершена')
+            exit()
         else:
             print('Ошибка! Попробуйте еще раз!')
 
 
 def main_function():
     while True:
-        print('\nВыберите действие: ')
+        print()
 
         action_main_py = int(input('\nЗдания - 1'
                                    '\nСотрудники - 2'
                                    '\nНаправления инженерии - 3'
                                    '\nДействия - 4'
-                                   '\nНазад - 5\n\n'))
+                                   '\n\nВыберите действие, которое хотите выполнить: '))
         if action_main_py == 1:
             # Здания
             building_main()
@@ -169,12 +167,9 @@ def main_function():
         elif action_main_py == 4:
             # Действия
             actions_main()
-        elif action_main_py == 5:
-            # Назад
-            main_function()
         elif action_main_py == 78:
-            print('Программа завершена')
-            break
+            print('\nПрограмма завершена')
+            exit()
         else:
             print('Ошибка! Попробуйте еще раз!')
 
