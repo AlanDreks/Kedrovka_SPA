@@ -77,7 +77,8 @@ def create_actions_table():
 
 
 # Создание баз данных
-create_buildings_table()
-create_employees_table()
-create_engineering_sections_table()
-create_actions_table()
+def create_data_bases():
+    create_buildings_table()
+    create_employees_table()
+    create_engineering_sections_table()
+    create_actions_table()
