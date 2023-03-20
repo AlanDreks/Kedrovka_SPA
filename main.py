@@ -1,9 +1,9 @@
 from building import new_buildings, display_rooms, update_building_name, change_floor_name, change_room_name, \
     add_floor, add_rooms, delete_floor, delete_room
 from employees import add_employee, show_employees, change_employees, delete_employee
-from engineering_sections import add_new_section, view_sections, delete_equipment, list_sections
 from actions import view_actions, add_action, delete_action
 from data_base import create_data_bases
+from warehouse import add_new_equipment, show_equipment, change_equipment, delete_equipment
 
 # Создание всех баз данных
 create_data_bases()
@@ -89,26 +89,26 @@ def employees_main():
             print('Ошибка! Попробуйте еще раз!')
 
 
-def engineering_sections_main():
+def warehouse_main():
     while True:
-        action_engineering_sections = int(input('\n\nДобавить новое оборудования - 1'
+        action_engineering_sections = int(input('\n\nДобавить новое оборудование - 1'
                                                 '\nПосмотреть список оборудования - 2'
                                                 '\nУдалить оборудование - 3'
-                                                '\nИзменить название оборудования - 4'
+                                                '\nИзменить оборудование - 4'
                                                 '\nНазад - 5'
                                                 '\n\nВыберите действие, которое хотите выполнить: '))
         if action_engineering_sections == 1:
             # Добавление нового оборудования
-            add_new_section()
+            add_new_equipment()
         elif action_engineering_sections == 2:
             # Показываем список направлений и оборудования
-            view_sections()
+            show_equipment()
         elif action_engineering_sections == 3:
             # удаляем оборудование
             delete_equipment()
         elif action_engineering_sections == 4:
             # изменяем оборудование
-            list_sections()
+            change_equipment()
         elif action_engineering_sections == 5:
             # Назад
             main_function()
@@ -152,7 +152,7 @@ def main_function():
 
         action_main_py = int(input('\nЗдания - 1'
                                    '\nСотрудники - 2'
-                                   '\nНаправления инженерии - 3'
+                                   '\nСклад - 3'
                                    '\nДействия - 4'
                                    '\n\nВыберите действие, которое хотите выполнить: '))
         if action_main_py == 1:
@@ -162,8 +162,8 @@ def main_function():
             # Сотрудники
             employees_main()
         elif action_main_py == 3:
-            # Направления инженерии
-            engineering_sections_main()
+            # Склад
+            warehouse_main()
         elif action_main_py == 4:
             # Действия
             actions_main()

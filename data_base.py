@@ -48,18 +48,24 @@ def create_employees_table():
     conn.close()
 
 
-# База данных "Направления"
-def create_engineering_sections_table():
-    conn = sqlite3.connect('engineering_sections.db')
+# База данных "Сотрудники"
+def create_warehouse_table():
+    conn = sqlite3.connect('warehouse.db')
     cursor = conn.cursor()
 
-    # Создаем таблицу для хранения направлений и оборудования
-    cursor.execute('''CREATE TABLE IF NOT EXISTS engineering_sections
-                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                      direction TEXT NOT NULL,
-                      equipment TEXT NOT NULL);''')
+    query = """
+    CREATE TABLE IF NOT EXISTS warehouse (
+        equipment_name TEXT,
+        count INTEGER,
+        photo TEXT,
+        price TEXT,
+        sections TEXT,
+        other INTEGER
+    )
+    """
 
-    # Закрываем соединение с базой данных
+    cursor.execute(query)
+    conn.commit()
     conn.close()
 
 
@@ -80,5 +86,5 @@ def create_actions_table():
 def create_data_bases():
     create_buildings_table()
     create_employees_table()
-    create_engineering_sections_table()
+    create_warehouse_table()
     create_actions_table()

@@ -4,13 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be466273-6704-4f13-ab16-0a65d85081fd" name="Changes" comment="" />
+    <list default="true" id="be466273-6704-4f13-ab16-0a65d85081fd" name="Changes" comment="combed, checked actions.py, building.py, employees.py, main.py">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actions.db" beforeDir="false" afterPath="$PROJECT_DIR$/actions.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildings.db" beforeDir="false" afterPath="$PROJECT_DIR$/buildings.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/employees.db" beforeDir="false" afterPath="$PROJECT_DIR$/employees.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engineering_sections.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/engineering_sections.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -26,8 +40,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/AlanDREKS/PycharmProjects/Kedrovka_SPA",
-    "settings.editor.selected.configurable": "proofread"
+    "last_opened_file_path": "C:/Users/AlanDREKS/PycharmProjects/Python_Basic/Module24/02_students/README.md",
+    "settings.editor.selected.configurable": "preferences.toDoOptions"
   }
 }]]></component>
   <component name="RunManager" selected="Python.main">
@@ -160,9 +174,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.engineering_sections" />
         <item itemvalue="Python.gui_main_1" />
         <item itemvalue="Python.gui_main" />
+        <item itemvalue="Python.engineering_sections" />
         <item itemvalue="Python.employees" />
       </list>
     </recent_temporary>
@@ -176,6 +190,47 @@
       <option name="presentableId" value="Default" />
       <updated>1678874565415</updated>
     </task>
+    <task id="LOCAL-00001" summary="combed, checked actions.py, building.py, employees.py, main.py">
+      <created>1679320160233</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679320160233</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="combed, checked actions.py, building.py, employees.py, main.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="combed, checked actions.py, building.py, employees.py, main.py" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/actions.py</url>
+          <line>22</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
