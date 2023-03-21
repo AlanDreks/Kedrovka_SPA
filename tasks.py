@@ -1,89 +1,105 @@
 import sqlite3
+from datetime import datetime
 
 
-def main():
+def submit_task(user_login):
     # Connect to the database
     conn = sqlite3.connect('buildings.db')
     cursor = conn.cursor()
 
-    # Show a list of buildings and ask the user for the building number
-    cursor.execute("SELECT * FROM buildings")
+    # Retrieve list of buildings from database
+    cursor.execute("SELECT id, name FROM buildings")
     buildings = cursor.fetchall()
-    print('\nСписок зданий: \n')
-    for b in buildings:
-        print(f"{b[0]}. {b[1]}")
-    building_num = int(input("\nВыберите номер здания: "))
 
-    # Show all floors for the selected building and ask for the floor number
-    cursor.execute("SELECT * FROM floors WHERE building_id = ?", (building_num,))
+    # Display list of buildings and prompt user to select one
+    print("Выберите здание:")
+    for building in buildings:
+        print(f"{building[0]}. {building[1]}")
+    building_id = input("Номер здания: ")
+
+    # Retrieve name of selected building
+    cursor.execute("SELECT name FROM buildings WHERE id = ?", (building_id,))
+    building_name = cursor.fetchone()[0]
+
+    # Retrieve list of floors for selected building
+    cursor.execute("SELECT id, name FROM floors WHERE building_id = ?", (building_id,))
     floors = cursor.fetchall()
-    print('\nСписок этажей: \n')
-    for f in floors:
-        print(f"{f[0]}. {f[2]}")
-    floor_num = int(input("\nВыберите номер этажа: "))
 
-    # Show a list of rooms for the selected floor and ask for the room number
-    cursor.execute("SELECT * FROM rooms WHERE floor_id = ?", (floor_num,))
+    # Display list of floors and prompt user to select one
+    print("Выберите этаж:")
+    for floor in floors:
+        print(f"{floor[0]}. {floor[1]}")
+    floor_id = input("Номер этажа: ")
+
+    # Retrieve name of selected floor
+    cursor.execute("SELECT name FROM floors WHERE id = ?", (floor_id,))
+    floor_name = cursor.fetchone()[0]
+
+    # Retrieve list of rooms for selected floor
+    cursor.execute("SELECT id, name FROM rooms WHERE floor_id = ?", (floor_id,))
     rooms = cursor.fetchall()
-    print('\nСписок помещений:\n')
-    for r in rooms:
-        print(f"{r[0]}. {r[2]}")
-    room_num = int(input("\nВыберите номер помещения: "))
 
-    # Connect to the engineering_sections database
-    conn = sqlite3.connect('engineering_sections.db')
+    # Display list of rooms and prompt user to select one
+    print("Выберите помещение:")
+    for room in rooms:
+        print(f"{room[0]}. {room[1]}")
+    room_id = input("Номер помещения: ")
+
+    # Retrieve name of selected room
+    cursor.execute("SELECT name FROM rooms WHERE id = ?", (room_id,))
+    room_name = cursor.fetchone()[0]
+
+    # Prompt user to select priority
+    priority = input("Приоритет (высокий/низкий): ")
+
+    # Prompt user to attach photo
+    photo = input("Прикрепить фото (да/нет): ")
+
+    # Prompt user to confirm and submit request
+    confirm = input("Подтвердить заявку (да/нет): ")
+    if confirm.lower() == 'да':
+        conn = sqlite3.connect('tasks.db')
+        cursor = conn.cursor()
+        # Insert new task into tasks table with current datetime
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        cursor.execute("INSERT INTO tasks (building_id, building_name, floor_id, floor_name, room_id, room_name, "
+                       "priority, photo, datetime, user_login) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (building_id, building_name, floor_id, floor_name, room_id, room_name, priority, photo, now, user_login))
+        conn.commit()
+        print("Заявка отправлена!")
+    else:
+        print("Отменено.")
+
+    # Closing the connection to the database
+    cursor.close()
+    conn.close()
+
+# viewing submitted applications
+def view_tasks():
+    # Connect to the database
+    conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor()
 
-    # Show a list of directions and ask the user for the direction name
-    cursor.execute("SELECT DISTINCT direction FROM engineering_sections")
-    directions = cursor.fetchall()
-    print("Список направлений:")
-    for d in directions:
-        print(f"{d[0]}. {d[1]}")
-    direction_name = input("\nВыберите направление, чтобы изменить оборудование: ")
+    # Retrieve list of tasks from database
+    cursor.execute("SELECT * FROM tasks")
+    tasks = cursor.fetchall()
 
-    # Show a list of equipment for the selected direction
-    cursor.execute("SELECT equipment FROM engineering_sections WHERE direction = ?",
-                   (direction_name,))
-    equipment = cursor.fetchall()
-    if len(equipment) > 0:
-        print(f"Список оборудования в направлении {direction_name}:")
-        for e in equipment:
-            print(f"{e[0]}. {e[2]}")
+    # Display list of tasks
+    for task in tasks:
+        print(f"Номер заявки: {task[0]}")
+        print(f"Здание: {task[2]} ({task[1]})")
+        print(f"Этаж: {task[4]} ({task[3]})")
+        print(f"Помещение: {task[6]} ({task[5]})")
+        print(f"Приоритет: {task[7]}")
+        print(f"Фото: {task[8]}")
+        print(f"Дата и время: {task[9]}")
+        print(f"Пользователь: {task[10]}")
+        print("\n")
 
-    # Ask the user for the equipment and count
-    equipment_id = input("\nВведите текущее название оборудования, которое нужно изменить: ")
-    count = int(input("Введите количество оборудования: "))
-
-    # Connect to the actions database and show a list of actions
-    conn = sqlite3.connect('actions.db')
-    cursor = conn.execute("SELECT * FROM Actions")
-    actions = cursor.fetchall()
-    for action in actions:
-        print(action[0], action[1])
+    # Closing the connection to the database
+    cursor.close()
     conn.close()
 
-    # Ask the user for the action and get its id
-    action_id = input("Введите id действия: ")
-
-    # Write all data to the main database
-    conn = sqlite3.connect('main_data.db')
-
-    cursor.execute("INSERT INTO main_data (building_num, floor_num, room_num, direction_name, equipment_id, count, action_id) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    (building_num, floor_num, room_num, direction_name, equipment_id, count, action_id))
-    cursor.execute("SELECT * FROM main_data ORDER BY id DESC LIMIT 1")
-    new_data = cursor.fetchone()
-    print("\nДобавлено в базу данных:\n")
-    print(f"ID: {new_data[0]}")
-    print(f"Номер здания: {new_data[1]}")
-    print(f"Номер этажа: {new_data[2]}")
-    print(f"Номер помещения: {new_data[3]}")
-    print(f"Направление: {new_data[4]}")
-    print(f"Название оборудования: {new_data[5]}")
-    print(f"Количество: {new_data[6]}")
-    print(f"ID действия: {new_data[7]}")
-
-    conn.commit()
-    conn.close()
-
-main()
+    # tommorow
+    # date
+    # status

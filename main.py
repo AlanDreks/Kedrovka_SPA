@@ -5,6 +5,7 @@ from employees import add_employee, show_employees, change_employees, delete_emp
 from actions import view_actions, add_action, delete_action
 from data_base import create_data_bases
 from warehouse import add_new_equipment, show_equipment, change_equipment, delete_equipment
+from tasks import submit_task
 
 
 def login():
@@ -14,14 +15,13 @@ def login():
         cursor = conn.cursor()
 
         # запрашиваем логин и пароль у пользователя
-        login = input("\nВведите логин: ")
-        password = input("Введите пароль: ")
+        user_login = input("\nВведите логин: ")
+        user_password = input("Введите пароль: ")
 
         # проверяем наличие логина и пароля в базе данных
         query = "SELECT * FROM employees WHERE login = ? AND password = ?"
-        cursor.execute(query, (login, password))
+        cursor.execute(query, (user_login, user_password))
         result = cursor.fetchone()
-
 
         if result is not None:
             # определяем права пользователя
@@ -31,7 +31,8 @@ def login():
                 admin_main()
             elif rights == "worker":
                 # запускаем функцию для сотрудника
-                worker_main()
+                print('You are worker!')
+                submit_task(user_login)
                 exit()
         else:
             print("Неправильный логин или пароль")
@@ -43,9 +44,6 @@ def login():
 def admin_main():
     print('You are admin!')
     main_function()
-
-def worker_main():
-    print('You are worker!')
 
 
 def building_main():

@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be466273-6704-4f13-ab16-0a65d85081fd" name="Changes" comment="create warehouse.py">
+    <list default="true" id="be466273-6704-4f13-ab16-0a65d85081fd" name="Changes" comment="added administrator and employee rights">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/actions.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_base.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employees.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/employees.py" beforeDir="false" afterPath="$PROJECT_DIR$/employees.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +203,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679327324379</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added login, password, rights for employees. functions checked сотрудники.ру.the function of creating the employees database in data base has been rewritten">
+      <created>1679366296042</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679366296042</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added administrator and employee rights">
+      <created>1679371172822</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679371172822</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -219,7 +234,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="combed, checked actions.py, building.py, employees.py, main.py" />
     <MESSAGE value="create warehouse.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="create warehouse.py" />
+    <MESSAGE value="added login, password, rights for employees. functions checked сотрудники.ру.the function of creating the employees database in data base has been rewritten" />
+    <MESSAGE value="added administrator and employee rights" />
+    <option name="LAST_COMMIT_MESSAGE" value="added administrator and employee rights" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

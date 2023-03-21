@@ -80,9 +80,32 @@ def create_actions_table():
                  action_name TEXT NOT NULL);''')
     conn.close()
 
-# База данных "Склад"
-# База данных "Отчет по месяцам"
-# База данных "Отчет за год"
+
+# База данных "Заявки"
+def create_tasks_table():
+    # Connect to the database
+    conn = sqlite3.connect('tasks.db')
+    cursor = conn.cursor()
+
+    # Create tasks table
+    cursor.execute("CREATE TABLE IF NOT EXISTS tasks ("
+                   "id INTEGER PRIMARY KEY,"
+                   "building_id INTEGER,"
+                   "building_name TEXT,"
+                   "floor_id INTEGER,"
+                   "floor_name TEXT,"
+                   "room_id INTEGER,"
+                   "room_name TEXT,"
+                   "priority TEXT,"
+                   "photo TEXT,"
+                   "datetime DATETIME"
+                   "user_login TEXT"
+                   ")")
+
+    # Commit changes and close connection
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 
 # Создание баз данных
@@ -91,3 +114,4 @@ def create_data_bases():
     create_employees_table()
     create_warehouse_table()
     create_actions_table()
+    create_tasks_table()
