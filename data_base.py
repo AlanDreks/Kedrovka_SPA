@@ -87,26 +87,25 @@ def create_tasks_table():
     conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor()
 
-    # Create tasks table
-    cursor.execute("CREATE TABLE IF NOT EXISTS tasks ("
-                   "id INTEGER PRIMARY KEY,"
-                   "building_id INTEGER,"
-                   "building_name TEXT,"
-                   "floor_id INTEGER,"
-                   "floor_name TEXT,"
-                   "room_id INTEGER,"
-                   "room_name TEXT,"
-                   "priority TEXT,"
-                   "photo TEXT,"
-                   "datetime DATETIME"
-                   "user_login TEXT"
-                   ")")
-
-    # Commit changes and close connection
+    query = """CREATE TABLE IF NOT EXISTS tasks (
+                       id INTEGER PRIMARY KEY,
+                       building_id INTEGER,
+                       building_name TEXT,
+                       floor_id INTEGER,
+                       floor_name TEXT,
+                       room_id INTEGER,
+                       room_name TEXT,
+                       priority TEXT,
+                       photo TEXT,
+                       datetime DATETIME,
+                       user_login TEXT,
+                       status TEXT, 
+                       worker TEXT
+    )
+    """
+    cursor.execute(query)
     conn.commit()
-    cursor.close()
     conn.close()
-
 
 # Создание баз данных
 def create_data_bases():

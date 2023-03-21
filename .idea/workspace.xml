@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be466273-6704-4f13-ab16-0a65d85081fd" name="Changes" comment="added administrator and employee rights">
+    <list default="true" id="be466273-6704-4f13-ab16-0a65d85081fd" name="Changes" comment="added tasks.py: submit_task(user_login), view_tasks(). create create_tasks_table() in data_base.py. not verified">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/actions.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings.db" beforeDir="false" />
@@ -65,7 +65,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="employees" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="data_base" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kedrovka_SPA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -77,28 +77,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\AlanDREKS\PycharmProjects\Kedrovka_SPA\employees.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="engineering_sections" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kedrovka_SPA" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/engineering_sections.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_base.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -170,13 +149,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="passwords" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kedrovka_SPA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/passwords.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.data_base" />
+        <item itemvalue="Python.passwords" />
         <item itemvalue="Python.gui_main_1" />
         <item itemvalue="Python.gui_main" />
-        <item itemvalue="Python.engineering_sections" />
-        <item itemvalue="Python.employees" />
       </list>
     </recent_temporary>
   </component>
@@ -217,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679371172822</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added tasks.py: submit_task(user_login), view_tasks(). create create_tasks_table() in data_base.py. not verified">
+      <created>1679389217457</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679389217457</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,7 +243,8 @@
     <MESSAGE value="create warehouse.py" />
     <MESSAGE value="added login, password, rights for employees. functions checked сотрудники.ру.the function of creating the employees database in data base has been rewritten" />
     <MESSAGE value="added administrator and employee rights" />
-    <option name="LAST_COMMIT_MESSAGE" value="added administrator and employee rights" />
+    <MESSAGE value="added tasks.py: submit_task(user_login), view_tasks(). create create_tasks_table() in data_base.py. not verified" />
+    <option name="LAST_COMMIT_MESSAGE" value="added tasks.py: submit_task(user_login), view_tasks(). create create_tasks_table() in data_base.py. not verified" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

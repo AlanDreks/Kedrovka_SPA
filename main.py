@@ -5,7 +5,11 @@ from employees import add_employee, show_employees, change_employees, delete_emp
 from actions import view_actions, add_action, delete_action
 from data_base import create_data_bases
 from warehouse import add_new_equipment, show_equipment, change_equipment, delete_equipment
-from tasks import submit_task
+from tasks import submit_task, view_tasks
+
+
+# Создание всех баз данных
+create_data_bases()
 
 
 def login():
@@ -17,7 +21,6 @@ def login():
         # запрашиваем логин и пароль у пользователя
         user_login = input("\nВведите логин: ")
         user_password = input("Введите пароль: ")
-
         # проверяем наличие логина и пароля в базе данных
         query = "SELECT * FROM employees WHERE login = ? AND password = ?"
         cursor.execute(query, (user_login, user_password))
@@ -32,8 +35,7 @@ def login():
             elif rights == "worker":
                 # запускаем функцию для сотрудника
                 print('You are worker!')
-                submit_task(user_login)
-                exit()
+                worker_main(user_login)
         else:
             print("Неправильный логин или пароль")
 
@@ -44,6 +46,37 @@ def login():
 def admin_main():
     print('You are admin!')
     main_function()
+
+
+def worker_main(user_login):
+    while True:
+        worker_actions = int(input('\n\nДобавление новой заявки - 1'
+                                   '\nПоказать всю информацию по заявкам - 2'
+                                   '\nУдалить действие - 3'
+                                   '\nНазад - 4'
+                                   '\n\nВыберите действие, которое хотите выполнить: '))
+        if worker_actions == 1:
+            # Новая заявка
+            submit_task(user_login)
+        elif worker_actions == 2:
+            # Посмотреть заявки
+            view_tasks()
+        elif worker_actions == 3:
+            # Склад
+            warehouse_main()
+        elif worker_actions == 4:
+            # Действия
+            actions_main()
+        elif worker_actions == 78:
+            print('\nПрограмма завершена')
+            exit()
+        else:
+            print('Ошибка! Попробуйте еще раз!')
+
+
+
+
+
 
 
 def building_main():
@@ -158,7 +191,6 @@ def warehouse_main():
 
 def actions_main():
     while True:
-        print('\nВыберите действие: ')
         action_actions = int(input('\n\nДобавление нового действия - 1'
                                    '\nПоказать всю информацию по действиям - 2'
                                    '\nУдалить действие - 3'
@@ -186,7 +218,6 @@ def actions_main():
 def main_function():
     while True:
         print()
-
         action_main_py = int(input('\nЗдания - 1'
                                    '\nСотрудники - 2'
                                    '\nСклад - 3'
@@ -211,6 +242,4 @@ def main_function():
             print('Ошибка! Попробуйте еще раз!')
 
 
-# Создание всех баз данных
-create_data_bases()
 login()
