@@ -1,3 +1,4 @@
+import sqlite3
 from building import new_buildings, display_rooms, update_building_name, change_floor_name, change_room_name, \
     add_floor, add_rooms, delete_floor, delete_room
 from employees import add_employee, show_employees, change_employees, delete_employee
@@ -5,8 +6,46 @@ from actions import view_actions, add_action, delete_action
 from data_base import create_data_bases
 from warehouse import add_new_equipment, show_equipment, change_equipment, delete_equipment
 
-# Создание всех баз данных
-create_data_bases()
+
+def login():
+    while True:
+        # открываем соединение с базой данных
+        conn = sqlite3.connect('employees.db')
+        cursor = conn.cursor()
+
+        # запрашиваем логин и пароль у пользователя
+        login = input("\nВведите логин: ")
+        password = input("Введите пароль: ")
+
+        # проверяем наличие логина и пароля в базе данных
+        query = "SELECT * FROM employees WHERE login = ? AND password = ?"
+        cursor.execute(query, (login, password))
+        result = cursor.fetchone()
+
+
+        if result is not None:
+            # определяем права пользователя
+            rights = result[8]
+            if rights == "admin":
+                # запускаем функцию для администратора
+                admin_main()
+            elif rights == "worker":
+                # запускаем функцию для сотрудника
+                worker_main()
+                exit()
+        else:
+            print("Неправильный логин или пароль")
+
+        # закрываем соединение
+        conn.close()
+
+
+def admin_main():
+    print('You are admin!')
+    main_function()
+
+def worker_main():
+    print('You are worker!')
 
 
 def building_main():
@@ -174,4 +213,6 @@ def main_function():
             print('Ошибка! Попробуйте еще раз!')
 
 
-main_function()
+# Создание всех баз данных
+create_data_bases()
+login()
