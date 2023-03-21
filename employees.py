@@ -13,12 +13,15 @@ def add_employee():
     number = input("Введите номер сотрудника: ")
     phone_number = input("Введите номер телефона сотрудника: ")
     position = input("Введите должность сотрудника: ")
+    login = input("Введите логин сотрудника: ")
+    password = input("Введите пароль сотрудника: ")
+    rights = input("Введите права сотрудника: ")
 
     # формируем запрос на добавление нового сотрудника
-    query = """INSERT INTO employees (last_name, first_name, middle_name, number, phone_number, position)
-               VALUES (?, ?, ?, ?, ?, ?)"""
+    query = """INSERT INTO employees (last_name, first_name, middle_name, number, phone_number, position, login, password, rights)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"""
     # используем параметризованный запрос для безопасного добавления данных
-    cursor.execute(query, (last_name, first_name, middle_name, number, phone_number, position))
+    cursor.execute(query, (last_name, first_name, middle_name, number, phone_number, position, login, password, rights))
 
     # сохраняем изменения в базе данных
     conn.commit()
@@ -47,7 +50,10 @@ def show_employees():
               f"Отчество: {employee[2]}\n"
               f"Номер: {employee[3]}\n"
               f"Номер телефона: {employee[4]}\n"
-              f"Должность: {employee[5]}")
+              f"Должность: {employee[5]}\n"
+              f"Логин: {employee[6]}\n"
+              f"Пароль: {employee[7]}\n"
+              f"Права: {employee[8]}")
         print()
 
     # закрываем соединение
@@ -60,7 +66,7 @@ def change_employees():
     cursor = conn.cursor()
 
     # выполняем запрос на выборку всех сотрудников
-    query = "SELECT rowid, last_name, first_name, middle_name, number, phone_number, position FROM employees"
+    query = "SELECT rowid, last_name, first_name, middle_name, number, phone_number, position, login, password, rights FROM employees"
     cursor.execute(query)
     employees = cursor.fetchall()
 
@@ -74,7 +80,7 @@ def change_employees():
     employee_id = int(employee_id)
 
     # выполняем запрос на выборку сотрудника с указанным номером
-    query = "SELECT last_name, first_name, middle_name, number, phone_number, position FROM employees WHERE rowid = ?"
+    query = "SELECT last_name, first_name, middle_name, number, phone_number, position, login, password, rights FROM employees WHERE rowid = ?"
     cursor.execute(query, (employee_id,))
     employee = cursor.fetchone()
 
@@ -86,14 +92,19 @@ def change_employees():
     print(f"Номер: {employee[3]}")
     print(f"Номер телефона: {employee[4]}")
     print(f"Должность: {employee[5]}")
+    print(f"Логин: {employee[6]}")
+    print(f"Пароль: {employee[7]}")
+    print(f"Права: {employee[8]}")
 
     # запрашиваем у пользователя параметр, который нужно изменить
     field_name = input("Введите название параметра, который нужно изменить (last_name, "
-                       "first_name, "
-                       "middle_name, "
-                       "number, "
-                       "phone_number, "
-                       "position): ")
+                       "first_name, middle_name, number, phone_number, position, login, password, rights): ")
+
+    # проверяем, что пользователь ввел допустимое название параметра
+    allowed_field_names = ["last_name", "first_name", "middle_name", "number", "phone_number", "position", "login",
+                           "password", "rights"]
+    while field_name not in allowed_field_names:
+        field_name = input("Введите корректное название параметра: ")
     field_value = input("Введите новое значение параметра: ")
 
     # выполняем запрос на обновление информации о сотруднике

@@ -39,7 +39,10 @@ def create_employees_table():
         middle_name TEXT,
         number TEXT,
         phone_number TEXT,
-        position TEXT
+        position TEXT,
+        login TEXT,
+        password TEXT,
+        rights TEXT
     )
     """
 
@@ -48,7 +51,7 @@ def create_employees_table():
     conn.close()
 
 
-# База данных "Сотрудники"
+# База данных "Склад"
 def create_warehouse_table():
     conn = sqlite3.connect('warehouse.db')
     cursor = conn.cursor()
