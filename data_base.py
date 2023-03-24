@@ -107,6 +107,35 @@ def create_tasks_table():
     conn.commit()
     conn.close()
 
+
+def tasks_worker():
+    # создаем соединение с базой данных
+    conn = sqlite3.connect('tasks_worker.db')
+
+    # создаем курсор для работы с базой данных
+    cursor = conn.cursor()
+
+    # создаем таблицу в базе данных
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS tasks_worker (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            building TEXT,
+            floor INTEGER,
+            room TEXT,
+            sections TEXT,
+            equipment TEXT,
+            quantity INTEGER,
+            action TEXT,
+            status TEXT,
+            comment TEXT
+        )
+    ''')
+
+    # сохраняем изменения в базе данных и закрываем соединение
+    conn.commit()
+    conn.close()
+
+
 # Создание баз данных
 def create_data_bases():
     create_buildings_table()
@@ -114,3 +143,4 @@ def create_data_bases():
     create_warehouse_table()
     create_actions_table()
     create_tasks_table()
+    tasks_worker()

@@ -15,6 +15,7 @@ def add_employee():
     position = input("Введите должность сотрудника: ")
     login = input("Введите логин сотрудника: ")
     password = input("Введите пароль сотрудника: ")
+    print('Вы можете выбрать следующие права:\nadmin\nworker\nemployee of another department')
     rights = input("Введите права сотрудника: ")
 
     # формируем запрос на добавление нового сотрудника
@@ -148,3 +149,36 @@ def delete_employee():
     conn.close()
 
 
+def change_password():
+    # открываем соединение с базой данных
+    conn = sqlite3.connect('employees.db')
+    cursor = conn.cursor()
+
+    # запрашиваем логин и пароль у пользователя
+    login = input('Введите логин: ')
+    password = input('Введите пароль: ')
+
+    # формируем запрос на поиск пользователя в базе данных
+    query = """SELECT * FROM employees WHERE login = ? AND password = ?"""
+    cursor.execute(query, (login, password))
+
+    # извлекаем данные о пользователе из запроса
+    user = cursor.fetchone()
+
+    if user is not None:
+        # если пользователь найден, выводим его данные
+        print(f'Добро пожаловать, {user[1]} {user[0]}!')
+        # предлагаем пользователю сменить пароль
+        change_password = input('Желаете сменить пароль? (да/нет): ')
+        if change_password.lower() == 'да':
+            new_password = input('Введите новый пароль: ')
+            # формируем запрос на обновление пароля в базе данных
+            update_query = """UPDATE employees SET password = ? WHERE login = ?"""
+            cursor.execute(update_query, (new_password, login))
+            conn.commit()
+            print('Пароль успешно изменен!')
+    else:
+        print('Пользователь не найден.')
+
+    # закрываем соединение с базой данных
+    conn.close()

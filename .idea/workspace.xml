@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be466273-6704-4f13-ab16-0a65d85081fd" name="Changes" comment="added tasks.py: submit_task(user_login), view_tasks(). create create_tasks_table() in data_base.py. not verified">
+    <list default="true" id="be466273-6704-4f13-ab16-0a65d85081fd" name="Changes" comment="verified tasks.py: submit_task(user_login), view_tasks().">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/actions.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/buildings.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_base.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employees.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/employees.py" beforeDir="false" afterPath="$PROJECT_DIR$/employees.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks.py" afterDir="false" />
     </list>
@@ -173,10 +174,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.data_base" />
         <item itemvalue="Python.passwords" />
         <item itemvalue="Python.gui_main_1" />
         <item itemvalue="Python.gui_main" />
+        <item itemvalue="Python.data_base" />
       </list>
     </recent_temporary>
   </component>
@@ -232,7 +233,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="work_branch" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -253,6 +266,11 @@
           <url>file://$PROJECT_DIR$/actions.py</url>
           <line>22</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

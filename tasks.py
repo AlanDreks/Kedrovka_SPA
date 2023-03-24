@@ -8,7 +8,8 @@ def submit_task(user_login_task):
     cursor = conn.cursor()
 
     # выполняем запрос на выборку всех сотрудников
-    query = "SELECT rowid, last_name, first_name, middle_name, number, phone_number, position, login, password, rights FROM employees"
+    query = "SELECT rowid, last_name, first_name, middle_name, number, phone_number, position, login, password, " \
+            "rights FROM employees"
     cursor.execute(query)
     employees = cursor.fetchall()
 
@@ -17,7 +18,7 @@ def submit_task(user_login_task):
     for employee in employees:
         print(f"{employee[0]}. {employee[1]} {employee[2]}")
 
-    # запрашиваем у пользователя номер сотрудника, информацию которого нужно изменить
+    # запрашиваем у пользователя номер сотрудника, который станет исполнителем
     employee_id = input("\nВведите номер сотрудника: ")
     employee_id = int(employee_id)
     cursor.execute("SELECT last_name, first_name  FROM employees WHERE rowid = ?", (employee_id,))
@@ -27,9 +28,6 @@ def submit_task(user_login_task):
     # закрываем соединение с базой данных
     cursor.close()
     conn.close()
-
-
-
 
     # Connect to the database
     conn = sqlite3.connect('buildings.db')
@@ -131,6 +129,54 @@ def view_tasks():
     cursor.close()
     conn.close()
 
-    # tommorow
+    # yesterday
     # date
     # status
+
+
+def tasks_worker(user_login_task):
+    # Connect to the database
+    conn = sqlite3.connect('buildings.db')
+    cursor = conn.cursor()
+
+    # Retrieve list of buildings from database
+    cursor.execute("SELECT id, name FROM buildings")
+    buildings = cursor.fetchall()
+
+    # Display list of buildings and prompt user to select one
+    print("\nВыберите здание:")
+    for building in buildings:
+        print(f"{building[0]}. {building[1]}")
+    building_id = input("\nНомер здания: ")
+
+    # Retrieve name of selected building
+    cursor.execute("SELECT name FROM buildings WHERE id = ?", (building_id,))
+    building_name = cursor.fetchone()[0]
+
+    # Retrieve list of floors for selected building
+    cursor.execute("SELECT id, name FROM floors WHERE building_id = ?", (building_id,))
+    floors = cursor.fetchall()
+
+    # Display list of floors and prompt user to select one
+    print("\nВыберите этаж:")
+    for floor in floors:
+        print(f"{floor[0]}. {floor[1]}")
+    floor_id = input("\nНомер этажа: ")
+
+    # Retrieve name of selected floor
+    cursor.execute("SELECT name FROM floors WHERE id = ?", (floor_id,))
+    floor_name = cursor.fetchone()[0]
+
+    # Retrieve list of rooms for selected floor
+    cursor.execute("SELECT id, name FROM rooms WHERE floor_id = ?", (floor_id,))
+    rooms = cursor.fetchall()
+
+    # Display list of rooms and prompt user to select one
+    print("\nВыберите помещение:")
+    for room in rooms:
+        print(f"{room[0]}. {room[1]}")
+    room_id = input("\nНомер помещения: ")
+
+    # Retrieve name of selected room
+    cursor.execute("SELECT name FROM rooms WHERE id = ?", (room_id,))
+    room_name = cursor.fetchone()[0]

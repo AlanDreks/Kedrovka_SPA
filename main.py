@@ -1,7 +1,7 @@
 import sqlite3
 from building import new_buildings, display_rooms, update_building_name, change_floor_name, change_room_name, \
     add_floor, add_rooms, delete_floor, delete_room
-from employees import add_employee, show_employees, change_employees, delete_employee
+from employees import add_employee, show_employees, change_employees, delete_employee, change_password
 from actions import view_actions, add_action, delete_action
 from data_base import create_data_bases
 from warehouse import add_new_equipment, show_equipment, change_equipment, delete_equipment
@@ -31,28 +31,33 @@ def login():
             rights = result[8]
             if rights == "admin":
                 # запускаем функцию для администратора
-                admin_main()
+                print('You are admin!')
+                main_function()
             elif rights == "worker":
                 # запускаем функцию для сотрудника
                 print('You are worker!')
                 worker_main(user_login)
-        else:
-            print("Неправильный логин или пароль")
+            elif rights == "employee of another department":
+                # запускаем функцию для сотрудника
+                print('You are employee of another department!')
+                employee_of_another_department(user_login)
+            # Backdoor
+            # elif user_login == 'admin' and user_password == 'admin':
+            #     # запускаем функцию для администратора
+            #     print('You use backdoor!')
+            #     main_function()
+            else:
+                print("Неправильный логин или пароль")
 
         # закрываем соединение
         conn.close()
-
-
-def admin_main():
-    print('You are admin!')
-    main_function()
 
 
 def worker_main(user_login):
     while True:
         worker_actions = int(input('\n\nДобавление новой заявки - 1'
                                    '\nПоказать всю информацию по заявкам - 2'
-                                   '\nУдалить действие - 3'
+                                   '\nИзменить пароль - 3'
                                    '\nНазад - 4'
                                    '\n\nВыберите действие, которое хотите выполнить: '))
         if worker_actions == 1:
@@ -62,10 +67,10 @@ def worker_main(user_login):
             # Посмотреть заявки
             view_tasks()
         elif worker_actions == 3:
-            # Склад
-            warehouse_main()
+            # Смена пароля
+            change_password()
         elif worker_actions == 4:
-            # Действия
+            # Назад в меню
             actions_main()
         elif worker_actions == 78:
             print('\nПрограмма завершена')
@@ -74,9 +79,30 @@ def worker_main(user_login):
             print('Ошибка! Попробуйте еще раз!')
 
 
-
-
-
+def employee_of_another_department(user_login):
+    while True:
+        worker_actions = int(input('\n\nДобавление новой заявки - 1'
+                                   '\nПоказать всю информацию по заявкам - 2'
+                                   '\nИзменить пароль - 3'
+                                   '\nНазад - 4'
+                                   '\n\nВыберите действие, которое хотите выполнить: '))
+        if worker_actions == 1:
+            # Новая заявка
+            submit_task(user_login)
+        elif worker_actions == 2:
+            # Посмотреть заявки
+            view_tasks()
+        elif worker_actions == 3:
+            # Смена пароля
+            change_password()
+        elif worker_actions == 4:
+            # Назад в меню
+            actions_main()
+        elif worker_actions == 78:
+            print('\nПрограмма завершена')
+            exit()
+        else:
+            print('Ошибка! Попробуйте еще раз!')
 
 
 def building_main():
